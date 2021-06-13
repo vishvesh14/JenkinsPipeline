@@ -17,9 +17,9 @@ pipeline {
         }
 
         stage('Report') {
-            environment{
-                LocalVariable = "Hello this is Local variable"
-            }
+          environment {
+            LocalVariable = 'Hello this is Local variable'
+          }
           steps {
             writeFile(file: 'LogTestFile.txt', text: "This is a automation test log file ${ChromeDriverPath} and ${LocalVariable}")
           }
@@ -29,14 +29,16 @@ pipeline {
     }
 
     stage('Deploy') {
+
       when {
         branch 'master'
       }
+
       parallel {
         stage('Deploy') {
           steps {
             echo 'Deploying the application'
-            input(message: 'Do you want to Deploy', id: 'Ok')
+            input(message: 'Do you want to Deploy ?', id: 'Ok')
           }
         }
 
